@@ -239,8 +239,9 @@ class Contacts(object):
     def retrieve_a_custom_field_value(self):
         raise NotImplementedError
 
-    def update_a_custom_field_value_for_contact(self):
-        raise NotImplementedError
+    def update_a_custom_field_value_for_contact(self, data):
+        field_value_id = data["fieldValue"]["field"]
+        return self.client._put(f"/fieldValues/{field_value_id}", json=data)
 
     def delete_a_custom_field_value(self):
         raise NotImplementedError
