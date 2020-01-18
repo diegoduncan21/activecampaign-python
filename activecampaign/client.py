@@ -50,9 +50,8 @@ class Client(object):
         return self._parse(requests.request(method, self.BASE_URL + endpoint, headers=_headers, **kwargs))
 
     def _parse(self, response):
-        if 'application/json' in response.headers['Content-Type']:
-            r = response.json()
-        else:
-            return response.text
-
-        return r
+        try:
+            res_to_return = response.json()
+        except Exception:
+            res_to_return = response.text
+        return res_to_return
